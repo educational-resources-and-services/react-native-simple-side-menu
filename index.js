@@ -1,19 +1,22 @@
-
 import React, { useRef } from 'react'
-import { Animated, StyleSheet, TouchableWithoutFeedback, Platform } from 'react-native'
+import { Animated, StyleSheet, TouchableWithoutFeedback, Platform, View } from 'react-native'
 
 import useUpdateEffect from "react-use/lib/useUpdateEffect"
 import usePrevious from "react-use/lib/usePrevious"
 import useUpdate from "react-use/lib/useUpdate"
 
 const styles = StyleSheet.create({
+  childrenContainer: {
+    zIndex: 1,
+    flex: 1,
+  },
   cover: {
     ...StyleSheet.absoluteFillObject,
     backgroundColor: 'rgba(0, 0, 0, .8)',
-    zIndex: 1,
+    zIndex: 2,
   },
   menu: {
-    zIndex: 2,
+    zIndex: 3,
     position: 'absolute',
     top: 0,
     bottom: 0,
@@ -31,6 +34,7 @@ const useNativeDriver = Platform.OS !== 'web'
 const SideMenu = ({
   open=false,
   onClose=() => {},
+  menu=null,
   children=null,
   
   menuWidth=280,
@@ -76,6 +80,9 @@ const SideMenu = ({
 
   return (
     <>
+      <View style={styles.childrenContainer}>
+        {children}
+      </View>
       {!!(open || prevOpen) &&
         <TouchableWithoutFeedback
           onPress={open ? onClose : null}
@@ -112,7 +119,7 @@ const SideMenu = ({
           },
         ]}
       >
-        {children}
+        {menu}
       </Animated.View>
     </>
   )
