@@ -7,8 +7,8 @@ import useUpdate from "react-use/lib/useUpdate"
 
 const styles = StyleSheet.create({
   childrenContainer: {
+    ...StyleSheet.absoluteFillObject,
     zIndex: 1,
-    flex: 1,
   },
   cover: {
     ...StyleSheet.absoluteFillObject,
