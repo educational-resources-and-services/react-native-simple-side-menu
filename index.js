@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import { Animated, StyleSheet, TouchableWithoutFeedback, Platform, View } from 'react-native'
+import { Animated, StyleSheet, TouchableWithoutFeedback, Platform, View, I18nManager } from 'react-native'
 
 import useUpdateEffect from "react-use/lib/useUpdateEffect"
 import usePrevious from "react-use/lib/usePrevious"
@@ -110,7 +110,7 @@ const SideMenu = ({
               translateX: animated.interpolate({
                 inputRange: [0, 1],
                 outputRange: (
-                  menuPosition === 'right'
+                  (menuPosition === 'right') === !I18nManager.isRTL
                     ? [menuWidth, 0]
                     : [menuWidth * -1, 0]
                 ),
